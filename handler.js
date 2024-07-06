@@ -284,6 +284,13 @@ try {
 await plugin.all.call(this, m, { chatUpdate, __dirname: ___dirname, __filename })
 } catch (e) {
 
+console.error(e)
+for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
+let data = (await conn.onWhatsApp(jid))[0] || {}
+if (data.exists)
+m.reply(`*⚠️ COMANDO FALLANDO ⚠️*\n\n*📑 PLUGIN :* ${name}\n*👤 USUARIO :* ${m.sender}\n*🚀 COMANDO :* ${m.text}\n\n\`\`\`${format(e)}\`\`\`\n`.trim(), data.jid)                               
+}}
+}
 
 if (!opts['restrict'])
 if (plugin.tags && plugin.tags.includes('admin')) {
@@ -429,7 +436,7 @@ console.error(e)
 }
 }
 if (m.diamond)
-m.reply(`💎 𝑺𝒆 𝒂 𝒖𝒕𝒊𝒍𝒊𝒛𝒂𝒅𝒐 𝒖𝒏 *${+m.diamond}* 𝒅𝒊𝒂𝒎𝒂𝒏𝒕𝒆`)
+m.reply(`💎 Se a utilizado un *${+m.diamond}* diamante`)
 }
 break
 }
@@ -568,8 +575,8 @@ for (let cs of callUpdate) {
 if (cs.isGroup == false) {
 if (cs.status == "offer") {
 let callmsg = await this.reply(nk.from, `Hola *@${cs.from.split('@')[0]}*, Las ${cs.isVideo ? 'videollamadas' : 'llamadas'} están prohibidas, seras bloqueado`, false, { mentions: [cs.from] })
-let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;Azami 👑;;;\nFN:Azami\nORG:Azami 👑\nTITLE:\nitem1.TEL;waid=18134039996:+598 9999\nitem1.X-ABLabel:Azami 👑\nX-WA-BIZ-DESCRIPTION:Solo cosas del bot.\nX-WA-BIZ-NAME:Azami 👑\nEND:VCARD`
-await this.sendMessage(cs.from, { contacts: { displayName: 'Azami 👑', contacts: [{ vcard }] }}, {quoted: callmsg})
+let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;Jxtxn17 👑;;;\nFN:Azami\nORG:Azami 👑\nTITLE:\nitem1.TEL;waid=18134039996:+51929972576\nitem1.X-ABLabel:Azami 👑\nX-WA-BIZ-DESCRIPTION:Solo cosas del bot.\nX-WA-BIZ-NAME:Jxtxn17 👑\nEND:VCARD`
+await this.sendMessage(cs.from, { contacts: { displayName: 'Jxtxn17 👑', contacts: [{ vcard }] }}, {quoted: callmsg})
 await this.updateBlockStatus(cs.from, 'block')
 }}}
 }
@@ -596,16 +603,16 @@ console.error(e)
 global.dfail = (type, m, conn) => {
 
 let msg = {
- rowner: '👑 𝐄𝐑𝐑𝐎𝐑 👑 *𝐞𝐬𝐭𝐞 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐬𝐨𝐥𝐨 𝐦𝐢 𝐝𝐞𝐬𝐚𝐫𝐫𝐨𝐥𝐥𝐚𝐝𝐨𝐫 𝐥𝐨 𝐩𝐮𝐞𝐝𝐞 𝐮𝐬𝐚𝐫*', 
- owner: '🍧 𝐄𝐑𝐑𝐎𝐑 🍧 *𝐞𝐬𝐭𝐞 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐬𝐨𝐥𝐨 𝐦𝐢 𝐩𝐫𝐨𝐩𝐞𝐭𝐚𝐫𝐢𝐨 𝐥𝐨 𝐩𝐮𝐞𝐝𝐞 𝐮𝐬𝐚𝐫*', 
- mods: '🚫 𝐄𝐑𝐑𝐎𝐑 🚫 *ᥱs𝗍ᥲ 𝖿ᥙᥒᥴі᥆́ᥒ s᥆ᥣ᥆ ᥱs ⍴ᥲrᥲ mіs m᥆ძᥱrᥲძ᥆rᥱs*', 
- premium: '🌸 𝑬𝑹𝑹𝑶𝑹 🌸 *𝑬𝒔𝒕𝒂 𝒇𝒖𝒏𝒄𝒊𝒐𝒏 𝒔𝒐𝒍𝒐 𝒆𝒔 𝒖𝒔𝒖𝒂𝒓𝒊𝒐𝒔 𝒑𝒓𝒆𝒎𝒊𝒖𝒎*', 
- group:  '🚫 𝐄𝐑𝐑𝐎𝐑 🚫 *ᥣᥲ 𝖿ᥙᥒᥴі᥆́ᥒ s᥆ᥣ᥆ ⍴ᥙᥱძᥱ sᥱr ᥱȷᥱᥴᥙ𝗍ᥲძᥲ ᥱᥒ grᥙ⍴᥆s*', 
- private: '🎇 *𝙴𝚁𝚁𝙾𝚁* 🎇 *𝚎𝚜𝚝𝚊 𝚏𝚞𝚗𝚌𝚒𝚘́𝚗 𝚜𝚘𝚕𝚘 𝚙𝚞𝚎𝚍𝚎 𝚜𝚎𝚛 𝚞𝚜𝚊𝚍𝚘 𝚎𝚗 𝚎𝚕 𝚌𝚑𝚊𝚝 𝚙𝚛𝚒𝚟𝚊𝚍𝚘*', 
- admin: '📌 𝙴𝚁𝚁𝙾𝚁 📌 𝙴𝚜𝚝𝚎 𝚌𝚘𝚖𝚗𝚍𝚘 𝚜𝚘𝚕𝚘 𝚙𝚞𝚎𝚍𝚎 𝚜𝚎𝚛 𝚞𝚜𝚊𝚍𝚘 𝚙𝚘𝚛 𝚊𝚍𝚖𝚒𝚗𝚜', 
- botAdmin: '🌃 𝐄𝐑𝐑𝐎𝐑 🌃 *𝐩𝐚𝐫𝐚 𝐮𝐬𝐚𝐫 𝐞𝐬𝐭𝐚 𝐟𝐮𝐧𝐜𝐢𝐨́𝐧 𝐝𝐞𝐛𝐨 𝐬𝐞𝐫 𝐚𝐝𝐦𝐢𝐧*', 
- unreg: '🍭 𝐄𝐑𝐑𝐎𝐑 🍭 *𝐡𝐞𝐲! 𝐚𝐥𝐭𝐨 𝐚𝐡𝐢 𝐧𝐨 𝐞𝐬𝐭𝐚𝐬r𝐫𝐞𝐠𝐢𝐬𝐭𝐫𝐚𝐝𝐨,r𝐫𝐞𝐠𝐢𝐬𝐭𝐫𝐞𝐬𝐞. 𝐩𝐚𝐫𝐚 𝐮𝐬𝐚𝐫 𝐞𝐬𝐭𝐚 𝐟𝐮𝐧𝐜𝐢𝐨́𝐧 𝐞𝐬𝐜𝐫𝐢𝐛𝐢𝐞𝐧𝐝𝐨:*\n\n• */reg nombre.edad*\n\n*_❕ Ejemplo_* : */reg Enzito.19*',
-restrict: '🚫 𝐄𝐑𝐑𝐎𝐑 🚫 *ᥱs𝗍ᥲ ᥴᥲrᥲᥴ𝗍ᥱrі́s𝗍іᥴᥲ ᥱs𝗍ᥲ ძᥱsᥲᥴ𝗍і᥎ᥲძᥲ*' 
+ rowner: '「👑」 *Esta función solo puede ser usada por mi creador*\n\n> Jxtxn17.', 
+ owner: '「👑」 *Esta función solo puede ser usada por mi desarrollador.', 
+ mods: '「👑」 *Esta función solo puede ser usada por mis desarrolladores.*', 
+ premium: '「👑」 *Esta función solo es para usuarios Premium.', 
+ group:  '「👑」 *Esta funcion solo puede ser ejecutada en grupos.*', 
+ private: '「👑」 *Esta función solo puede ser usada en chat privado.*', 
+ admin: '「👑」 *Este comando solo puede ser usado por admins.*', 
+ botAdmin: '👑」 *Para usar esta función debo ser admin.*', 
+ unreg: '「👑」 *¡Hey! no estas registrado, registrese para usar esta función*\n\n*/reg nombre.edad*\n\n*_❕ Ejemplo_* : */reg Ax.25*',
+restrict: '「👑」 *Esta característica esta desactivada.*' 
 }[type]
 if (msg) return conn.reply(m.chat, msg, m, { contextInfo:{ externalAdReply: {title: ' ' + saludo + ' ' + nombre , body: dev, sourceUrl: global.channel, thumbnailUrl: ImgAll.getRandom() }}})
 
